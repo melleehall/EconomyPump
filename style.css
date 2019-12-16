@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+.hero-img {
+    background-color: lightgray;
+    padding: 25px;
+}
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    background-color: white;
+}
+
+.search-view {
+    background-color: lightgray;
+    padding: 45px;
+}
+
+main {
+    background-color: gray;
+    padding: 25px;
+}
+
+.map {
+    margin-top: 50px;
+}
+
+.shop-placeholder {
+    height: 300px;
+    width: 300px;
+    background-color: white;
+    margin-bottom: 50px;
+    justify-content: center;
+    text-align: center;
+}
