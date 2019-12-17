@@ -5,8 +5,9 @@
 // US Census Bureau API uses 2 digit FIPS State Codes for location parameter
 
 const storeFIPS = {
-    "Alabama"               :  "01",
+   "Alabama"                :  "01",
    "Alaska"                 :  "02",
+   "American Samoa"         :  "60",
    "Arizona"                :  "04",
    "Arkansas"               :  "05",
    "California"             :  "06",
@@ -16,6 +17,7 @@ const storeFIPS = {
    "District of Columbia"   :  "11",
    "Florida"                :  "12",
    "Geogia"                 :  "13",
+   "Guam"                   :  "66",
    "Hawaii"                 :  "15",
    "Idaho"                  :  "16",
    "Illinois"               :  "17",
@@ -44,6 +46,7 @@ const storeFIPS = {
    "Oklahoma"               :  "40",
    "Oregon"                 :  "41",
    "Pennsylvania"           :  "42",
+   "Puerto Rico"            :  "72",
    "Rhode Island"           :  "44",
    "South Carolina"         :  "45",
    "South Dakota"           :  "46",
@@ -51,19 +54,15 @@ const storeFIPS = {
    "Texas"                  :  "48",
    "Utah"                   :  "49",
    "Vermont"                :  "50",
+   "Virgin Islands"         :  "78",
    "Virginia"               :  "51",
    "Washington"             :  "53",
    "West Virginia"          :  "54",
    "Wisconsin"              :  "55",
    "Wyoming"                :  "56"
-}
+};
 
 // test function
-
-$(function testFunc(){
-    console.log(storeFIPS);
-}
-)
 
 // Event handlers
 
@@ -71,15 +70,17 @@ function goButton () {
     $('.go').click(function () {
         $('.hero-img').addClass('hide');
         $('.search-view').removeClass('hide');
-        console.log(`goButton function ran`)
     });
 }
 
 function searchButton () {
     $('.search').click(function () {
+        const place = $('.places').val();
+        console.log(place);
+        // US Census API will be called and location and its avg HH income plus relativity to US avg will be displayed in stats-view
+        // geolocation API will be called with this value and lat/long will be returned and stored for use by Etsy API if needed for shop location param
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');
-        console.log(`goButton function ran`)
     });
 }
 
@@ -87,7 +88,6 @@ function shopButton () {
     $('.shop').click(function () {
         $('.stats-view').addClass('hide');
         $('.shop-view').removeClass('hide');
-        console.log(`goButton function ran`)
     });
 }
 
