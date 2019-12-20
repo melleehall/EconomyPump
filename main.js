@@ -101,7 +101,7 @@ function usMedianHHIncome () {
     for (let i=0; i < states.length; i++) {
         let code = storeFIPS[states[i]];
         console.log(code);
-
+        getMedianHHIncome(code);
         // call US census api with FIPS code for each state and add med HH income returned to total
     }
     // return usHHAccumulator / states.length;
@@ -142,9 +142,8 @@ function getMedianHHIncome(query) {
   
     const queryString = formatQueryParams(params);
     const url = searchURL + '?' + queryString;
-    console.log(url);
-  
-    fetchCensusData(url);
+    
+    return url;
   }
 
 
@@ -163,7 +162,11 @@ function searchButton () {
         const place = $('.places').val();
         // Access the FIPS code for the selected state and pass it as the argument
         getMedianHHIncome(storeFIPS[place]);
+        //confirm that the correct url is returned
+        console.log(url);
+        fetchCensusData(url);
         // geolocation API will be called with this value and lat/long will be returned and stored for use by Etsy API if needed for shop location param
+      
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');
     });
