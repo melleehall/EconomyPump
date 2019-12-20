@@ -19,13 +19,12 @@
             <button type="button" class="go"> shop to make someone's day </button>
         </div>
         <div class="search-view flex-col-center hide">
-                <p> Please, select location from the dropdown menu to see how the average household income compares to the rest of the US </p>
+                <p> Please, select location from the dropdown menu to see how the median household income compares to the rest of the US </p>
                 <div class="dropdown flex-row-center">
                     <select class="places"> 
                         <option value="Select a location..."> Select a location... </option>
                         <option value="Alabama"> Alabama </option>
                         <option value="Alaska"> Alaska </option>
-                        <option value="American Samoa"> American Samoa </option>
                         <option value="Arizona"> Arizona </option>
                         <option value="Arizona"> Arkansas </option>
                         <option value="California"> California </option>
@@ -64,7 +63,6 @@
                         <option value="Oklahoma"> Oklahoma </option>
                         <option value="Oregon"> Oregon </option>
                         <option value="Pennsylvania"> Pennsylvania </option>
-                        <option value="Puerto Rico"> Puerto Rico </option>
                         <option value="Rhode Island"> Rhode Island </option>
                         <option value="South Carolina"> South Carolina </option>
                         <option value="South Dakota"> South Dakota </option>
@@ -73,7 +71,6 @@
                         <option value="Utah"> Utah </option>
                         <option value="Vermont"> Vermont </option>
                         <option value="Virginia"> Virginia </option>
-                        <option value="Virgin Islands"> Virgin Islands</option>
                         <option value="Washington"> Washington </option>
                         <option value="West Virginia"> West Virginia </option>
                         <option value="Wisconsin"> Wisconsin </option>
@@ -84,7 +81,7 @@
         </div>
         <div class="stats-view flex-col-center hide">
             <img src="USmap.jpeg" alt="map with flag on search location" class="map">
-            <p class="hh-income"> The average Household income in <span> [selected state/territory]</span> is <span> [avg HH income in selected state] </span> which is <span> [percentage higher or lower than the avg. HH income in the US] </span> </p>
+            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is <span class="js-state-median"> </span> which is <span> [percentage higher or lower than the median HH income in the US] </span> </p>
             <button type="button" class="shop"> see shops </button>
         </div>
         <div class="shop-view flex-col-center hide">
@@ -96,7 +93,7 @@
         </div>
     </main>
     <footer>
-        
+        <p>This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.</p>
     </footer>
     </section>
     <section>

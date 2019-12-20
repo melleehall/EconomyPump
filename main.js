@@ -3,11 +3,9 @@
 // Stored data
 
 // US Census Bureau API uses 2 digit FIPS State Codes for location parameter
-
 const storeFIPS = {
    "Alabama"                :  "01",
    "Alaska"                 :  "02",
-   "American Samoa"         :  "60",
    "Arizona"                :  "04",
    "Arkansas"               :  "05",
    "California"             :  "06",
@@ -46,7 +44,6 @@ const storeFIPS = {
    "Oklahoma"               :  "40",
    "Oregon"                 :  "41",
    "Pennsylvania"           :  "42",
-   "Puerto Rico"            :  "72",
    "Rhode Island"           :  "44",
    "South Carolina"         :  "45",
    "South Dakota"           :  "46",
@@ -54,7 +51,6 @@ const storeFIPS = {
    "Texas"                  :  "48",
    "Utah"                   :  "49",
    "Vermont"                :  "50",
-   "Virgin Islands"         :  "78",
    "Virginia"               :  "51",
    "Washington"             :  "53",
    "West Virginia"          :  "54",
@@ -62,7 +58,96 @@ const storeFIPS = {
    "Wyoming"                :  "56"
 };
 
-// test function
+// store api key and endpoint
+
+const searchURL = 'http://api.census.gov/data/timeseries/poverty/saipe';
+
+// Display-Related Functions
+
+function modifyStatsView (responseJson) {
+    $('.js-selected-state').text(responseJson[1][0]);
+    $('.js-state-median').text(responseJson[1][1]);
+}
+
+// Calculate Median HH Income for US
+
+function getMedianHHIncome(query) {
+    const params = {
+      time: 2018,
+      get: 'NAME,SAEMHI_PT',
+      for: `state:${query}`
+    };
+  
+    const queryString = formatQueryParams(params);
+    const url = searchURL + '?' + queryString;
+    console.log(url);
+  
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(response.statusText);
+      })
+      .then(responseJson => modifyStatsView(responseJson))
+      .catch(err => {
+        $('#js-error-message').text(`Something went wrong: ${err.message}`);
+      });
+  }
+
+function usMedianHHIncome () {
+    let states = Object.keys(storeFIPS);
+    const usHHAccumulator = 0;
+    for (let i=0; i < states.length; i++) {
+        let code = storeFIPS[states[i]];
+        console.log(code);
+
+        // call US census api with FIPS code for each state and add med HH income returned to total
+    }
+    // return usHHAccumulator / states.length;
+}
+
+$(usMedianHHIncome);
+
+// API Call-Related functions
+
+function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+      .map(key => `${key}=${params[key]}`)
+    return queryItems.join('&');
+  }
+
+
+  // need a different function for the accumulator - want to add returned value to total, not display stats
+  function fetchCensusData (url) {
+    fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(responseJson => modifyStatsView(responseJson))
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+  }
+
+function getMedianHHIncome(query) {
+    const params = {
+      time: 2018,
+      get: 'NAME,SAEMHI_PT',
+      for: `state:${query}`
+    };
+  
+    const queryString = formatQueryParams(params);
+    const url = searchURL + '?' + queryString;
+    console.log(url);
+  
+    fetchCensusData(url);
+  }
+
+
 
 // Event handlers
 
@@ -76,8 +161,8 @@ function goButton () {
 function searchButton () {
     $('.search').click(function () {
         const place = $('.places').val();
-        console.log(place);
-        // US Census API will be called and location and its avg HH income plus relativity to US avg will be displayed in stats-view
+        // Access the FIPS code for the selected state and pass it as the argument
+        getMedianHHIncome(storeFIPS[place]);
         // geolocation API will be called with this value and lat/long will be returned and stored for use by Etsy API if needed for shop location param
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');
