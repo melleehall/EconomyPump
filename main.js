@@ -69,57 +69,36 @@ function modifyStatsView (responseJson) {
     $('.js-state-median').text(responseJson[1][1]);
 }
 
-// Calculate Median HH Income for US
-
-function getMedianHHIncome(query) {
-    const params = {
-      time: 2018,
-      get: 'NAME,SAEMHI_PT',
-      for: `state:${query}`
-    };
-  
-    const queryString = formatQueryParams(params);
-    const url = searchURL + '?' + queryString;
-    console.log(url);
-  
-    fetch(url)
+function generateUSHHIncome() {
+    let states = Object.keys(storeFIPS);
+    let incomes = [];
+    for (let i=0; i < states.length; i++) {
+        let code = storeFIPS[states[i]];
+        const url = getURL(code);
+        fetch(url)
       .then(response => {
         if (response.ok) {
           return response.json();
         }
-        throw new Error(response.statusText);
+          throw new Error(response.statusText);
+        })
+        .then(function(responseJson) {
+          const income = responseJson[1][1];
+          incomes.push(income);
+          console.log(incomes);
+        }) 
+        .catch(err => {
+          $('#js-error-message').text(`Something went wrong: ${err.message}`);
       })
-      .then(responseJson => modifyStatsView(responseJson))
-      .catch(err => {
-        $('#js-error-message').text(`Something went wrong: ${err.message}`);
-      });
-  }
-
-function usMedianHHIncome () {
-    let states = Object.keys(storeFIPS);
-    const usHHAccumulator = 0;
-    for (let i=0; i < states.length; i++) {
-        let code = storeFIPS[states[i]];
-        console.log(code);
-        getMedianHHIncome(code);
-        // call US census api with FIPS code for each state and add med HH income returned to total
-    }
-    // return usHHAccumulator / states.length;
+    };
+    console.log(`${incomes} outside of the promise`)
 }
 
-$(usMedianHHIncome);
-
+$(generateUSHHIncome)
+    
 // API Call-Related functions
 
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-      .map(key => `${key}=${params[key]}`)
-    return queryItems.join('&');
-  }
-
-
-  // need a different function for the accumulator - want to add returned value to total, not display stats
-  function fetchCensusData (url) {
+function getHHIncomeDisplay(url) {
     fetch(url)
     .then(response => {
       if (response.ok) {
@@ -130,10 +109,18 @@ function formatQueryParams(params) {
     .then(responseJson => modifyStatsView(responseJson))
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
-    });
-  }
+  });
+}
 
-function getMedianHHIncome(query) {
+// Creates URLs for US Census API Calls
+
+function formatQueryParams(params) {
+  const queryItems = Object.keys(params)
+  .map(key => `${key}=${params[key]}`);
+  return queryItems.join('&');
+}
+
+function getURL(query) {
     const params = {
       time: 2018,
       get: 'NAME,SAEMHI_PT',
@@ -161,10 +148,9 @@ function searchButton () {
     $('.search').click(function () {
         const place = $('.places').val();
         // Access the FIPS code for the selected state and pass it as the argument
-        getMedianHHIncome(storeFIPS[place]);
-        //confirm that the correct url is returned
-        console.log(url);
-        fetchCensusData(url);
+        const url = getURL(storeFIPS[place]);
+        getHHIncomeDisplay(url);
+      
         // geolocation API will be called with this value and lat/long will be returned and stored for use by Etsy API if needed for shop location param
       
         $('.search-view').addClass('hide');
