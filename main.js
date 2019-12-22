@@ -60,41 +60,74 @@ const storeFIPS = {
 
 // store api key and endpoint
 
-const searchURL = 'http://api.census.gov/data/timeseries/poverty/saipe';
+const searchURLCensus = 'http://api.census.gov/data/timeseries/poverty/saipe';
+
+const searchURLEtsy = 'https://openapi.etsy.com/v2/listings/active/';
+
+const etsyKey1 = 'xo3uhc5fmp9o';
+
+const etsyKey2 = '275kczo2uef6';
+
+const usMedianIncome = 63179;
 
 // Display-Related Functions
 
 function modifyStatsView (responseJson) {
     $('.js-selected-state').text(responseJson[1][0]);
     $('.js-state-median').text(responseJson[1][1]);
+
+    const percent = compareIncomes(responseJson);
+    
+    if (percent > 0) {
+      $('.percent').text(percent);
+      $('.highlow').text('higher');
+      $('.highlow').addClass('green');
+    } else {
+      const posPercent = Math.abs(percent);
+      $('.percent').text(posPercent);
+      $('.highlow').text('lower');
+      $('.highlow').addClass('red');
+    };   
 }
 
-function generateUSHHIncome() {
-    let states = Object.keys(storeFIPS);
-    let incomes = [];
-    for (let i=0; i < states.length; i++) {
-        let code = storeFIPS[states[i]];
-        const url = getURL(code);
-        fetch(url)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-          throw new Error(response.statusText);
-        })
-        .then(function(responseJson) {
-          const income = responseJson[1][1];
-          incomes.push(income);
-          console.log(incomes);
-        }) 
-        .catch(err => {
-          $('#js-error-message').text(`Something went wrong: ${err.message}`);
-      })
-    };
-    console.log(`${incomes} outside of the promise`)
+
+// Pure US HH Income-Related Functions
+
+function compareIncomes (responseJson) {
+    const stateInc = responseJson[1][1];
+    const percent = Math.round(((stateInc - usMedianIncome) / stateInc) * 100);
+    return percent;
 }
 
-$(generateUSHHIncome)
+
+// need to figure out how to get a return value for HH income out of this promise
+
+// function generateUSHHIncome() {
+//     let states = Object.keys(storeFIPS);
+//     let incomes = [];
+//     for (let i=0; i < states.length; i++) {
+//         let code = storeFIPS[states[i]];
+//         const url = getURL(code);
+//         fetch(url)
+//       .then(response => {
+//         if (response.ok) {
+//           return response.json();
+//         }
+//           throw new Error(response.statusText);
+//         })
+//         .then(function(responseJson) {
+//           const income = responseJson[1][1];
+//           incomes.push(income);
+//           console.log(incomes);
+//         }) 
+//         .catch(err => {
+//           $('#js-error-message').text(`Something went wrong: ${err.message}`);
+//       })
+//     };
+//     console.log(`${incomes} outside of the promise`)
+// }
+
+// $(generateUSHHIncome)
     
 // API Call-Related functions
 
@@ -120,7 +153,7 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
-function getURL(query) {
+function getURLCensus(query) {
     const params = {
       time: 2018,
       get: 'NAME,SAEMHI_PT',
@@ -128,12 +161,22 @@ function getURL(query) {
     };
   
     const queryString = formatQueryParams(params);
-    const url = searchURL + '?' + queryString;
+    const url = searchURLCensus + '?' + queryString;
     
     return url;
   }
 
+function getURLEtsy(query) {
+  const params = {
+    location: query,
+    api_key: etsyKey1 + etsyKey2
+  };
 
+  const queryString = formatQueryParams(params);
+  const url = searchURLEtsy + '?' + queryString;
+    
+  return url;
+}
 
 // Event handlers
 
@@ -148,11 +191,13 @@ function searchButton () {
     $('.search').click(function () {
         const place = $('.places').val();
         // Access the FIPS code for the selected state and pass it as the argument
-        const url = getURL(storeFIPS[place]);
-        getHHIncomeDisplay(url);
+        const urlCensus = getURLCensus(storeFIPS[place]);
+        getHHIncomeDisplay(urlCensus);
       
-        // geolocation API will be called with this value and lat/long will be returned and stored for use by Etsy API if needed for shop location param
-      
+        // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
+        const urlEtsy = getURLEtsy(place)
+        console.log(urlEtsy);
+
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');
     });
