@@ -60,7 +60,7 @@ const storeFIPS = {
 
 // store api key and endpoint
 
-const searchURLCensus = 'http://api.census.gov/data/timeseries/poverty/saipe';
+const searchURLCensus = 'https://api.census.gov/data/timeseries/poverty/saipe';
 
 const searchURLEtsy = 'https://openapi.etsy.com/v2/listings/active/.js';
 
