@@ -62,7 +62,7 @@ const storeFIPS = {
 
 const searchURLCensus = 'http://api.census.gov/data/timeseries/poverty/saipe';
 
-const searchURLEtsy = 'https://openapi.etsy.com/v2/listings/active/';
+const searchURLEtsy = 'https://openapi.etsy.com/v2/listings/active/.js';
 
 const etsyKey1 = 'xo3uhc5fmp9o';
 
@@ -90,6 +90,10 @@ function modifyStatsView (responseJson) {
     };   
 }
 
+function modifyShopsView (responseJson) {
+  console.log(`modifyShopsView is running`);
+}
+
 
 // Pure US HH Income-Related Functions
 
@@ -100,7 +104,7 @@ function compareIncomes (responseJson) {
 }
 
 
-// need to figure out how to get a return value for HH income out of this promise
+// need to figure out how to get a return value for HH income out of this promise (revisit this)
 
 // function generateUSHHIncome() {
 //     let states = Object.keys(storeFIPS);
@@ -129,7 +133,7 @@ function compareIncomes (responseJson) {
 
 // $(generateUSHHIncome)
     
-// API Call-Related functions
+// API Calling Functions
 
 function getHHIncomeDisplay(url) {
     fetch(url)
@@ -145,7 +149,22 @@ function getHHIncomeDisplay(url) {
   });
 }
 
-// Creates URLs for US Census API Calls
+function getEtsyShops(url) {
+  console.log(`getEtsyShop fetch function running`);
+  fetch(url, {mode: "no-cors"})
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error(response.statusText);
+  })
+  .then(responseJson => modifyShopsView(responseJson))
+  .catch(err => {
+    $('#js-error-message').text(`Something went wrong: ${err.message}`);
+});
+}
+
+// URL Generating Functions
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
@@ -169,6 +188,7 @@ function getURLCensus(query) {
 function getURLEtsy(query) {
   const params = {
     location: query,
+    callback: getData,
     api_key: etsyKey1 + etsyKey2
   };
 
@@ -178,7 +198,7 @@ function getURLEtsy(query) {
   return url;
 }
 
-// Event handlers
+// Event Handlers
 
 function goButton () {
     $('.go').click(function () {
@@ -190,13 +210,17 @@ function goButton () {
 function searchButton () {
     $('.search').click(function () {
         const place = $('.places').val();
-        // Access the FIPS code for the selected state and pass it as the argument
+
+        // Access the FIPS code for the selected state and pass it as the argument to the US Census API
         const urlCensus = getURLCensus(storeFIPS[place]);
         getHHIncomeDisplay(urlCensus);
       
         // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
         const urlEtsy = getURLEtsy(place)
-        console.log(urlEtsy);
+
+        console.log(`Etsy API URL is ${urlEtsy}`);
+        $('.js-etsy-url').attr('src', urlEtsy);
+
 
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');

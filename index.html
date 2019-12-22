@@ -81,11 +81,25 @@
         </div>
         <div class="stats-view flex-col-center hide">
             <img src="USmap.jpeg" alt="map with flag on search location" class="map">
-            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow red"> </span> than the median household income in the US. </p>
+            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow"> </span> than the median household income in the US. </p>
             <button type="button" class="shop"> see shops </button>
         </div>
         <div class="shop-view flex-col-center hide">
             <h2> THE SHOP </h2>
+
+            <script type="text/javascript">
+                function getData(data) {
+                      if (data.ok) {
+                            // do something with the data here
+                            alert('Data is ok');
+                        } else {
+                            alert(data.error);
+                      }
+                }
+              </script> 
+              
+              <script class="js-etsy-url" src=""></script>
+
             <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
             <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
             <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
@@ -97,7 +111,7 @@
     </footer>
     </section>
     <section>
-            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="main.js"></script>
     </section>
 </body>
