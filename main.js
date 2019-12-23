@@ -90,8 +90,19 @@ function modifyStatsView (responseJson) {
     };   
 }
 
-function modifyShopsView (responseJson) {
-  console.log(`modifyShopsView is running`);
+function modifyShopsView (results) {
+  for (let i = 0; i < results.length; i++) {
+    const productName = results[i]['title'];
+    const description = (results[i]['description']).substring(0, 250);
+    const url = results[i]['url'];
+    const productDetails = `<div class="product"> 
+      <h3 class="js-product"> ${productName} </h3> 
+      <p class="js-description"> ${description}... </p> 
+      <a class="js-etsy-link" href=${url} target="_blank"> ${url} <a>
+      </div>`;
+      $('.products-container').append(productDetails);
+  };
+  console.log('populated stores');
 }
 
 
@@ -150,7 +161,6 @@ function getHHIncomeDisplay(url) {
 }
 
 function getEtsyShops(url) {
-  console.log(`getEtsyShop fetch function running`);
   fetch(url, {mode: "no-cors"})
   .then(response => {
     if (response.ok) {
@@ -188,7 +198,6 @@ function getURLCensus(query) {
 function getURLEtsy(query) {
   const params = {
     location: query,
-    callback: getData,
     api_key: etsyKey1 + etsyKey2
   };
 
@@ -217,10 +226,6 @@ function searchButton () {
       
         // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
         const urlEtsy = getURLEtsy(place)
-
-        console.log(`Etsy API URL is ${urlEtsy}`);
-        $('.js-etsy-url').attr('src', urlEtsy);
-
 
         $('.search-view').addClass('hide');
         $('.stats-view').removeClass('hide');

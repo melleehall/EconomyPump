@@ -6,18 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Economy Pump </title>
     <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+    (function($){
+        
+        $(document).ready(function(){
+            $('.search').click(function () {
+                const place = $('.places').val();
+                const urlEtsy = getURLEtsy(place);
+
+                console.log(`Etsy API URL in HTML ${urlEtsy}`);
+
+                $.ajax({
+                url: urlEtsy,
+                dataType: 'jsonp',
+                success: function(data) {
+                    if (data.ok) {
+                        modifyShopsView(data.results);
+                    } else {
+                        alert('not working');
+                    }
+                    }
+                });
+            })
+            })
+        })
+        (jQuery);
+    </script>
+
 </head>
 <body>
     <header>
         <nav class="nav-bar">
         </nav>
     </header>
-    <main class="main flex-col-center">
+    <main class="flex-col-center">
         <div class="hero-img flex-col-center">
             <h1> ECONOMY PUMP </h1>
             <p> Compelling text about why you should shop from small businesses.  Initial thoughts - share an inspiring Etsy success story, comparison to sustainable tourism (visiting somewhere to make positive impact on society/economy), stats about Amazon revenue </p>
             <button type="button" class="go"> shop to make someone's day </button>
         </div>
+
         <div class="search-view flex-col-center hide">
                 <p> Please, select location from the dropdown menu to see how the median household income compares to the rest of the US </p>
                 <div class="dropdown flex-row-center">
@@ -79,40 +110,24 @@
                 <button type="button" class="search"> check stats </button>
             </div>
         </div>
+
         <div class="stats-view flex-col-center hide">
             <img src="USmap.jpeg" alt="map with flag on search location" class="map">
             <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow"> </span> than the median household income in the US. </p>
             <button type="button" class="shop"> see shops </button>
+            <!-- <button type="button" class="go"> select a new location </button> -->
         </div>
+
         <div class="shop-view flex-col-center hide">
             <h2> THE SHOP </h2>
+            <div class="products-container flex-col-center">
 
-            <script type="text/javascript">
-                function getData(data) {
-                      if (data.ok) {
-                            // do something with the data here
-                            alert('Data is ok');
-                        } else {
-                            alert(data.error);
-                      }
-                }
-              </script> 
-              
-              <script class="js-etsy-url" src=""></script>
-
-            <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
-            <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
-            <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
-            <div class="shop-placeholder flex-col-center"> <h3> Etsy Shop Name </h3> <p> Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> <a href=""> Click here to visit this storefront </a></div>
+            </div>
         </div>
+
     </main>
-    <footer>
+    <!-- <footer>
         <p>This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.</p>
-    </footer>
-    </section>
-    <section>
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script src="main.js"></script>
-    </section>
+    </footer> -->
 </body>
 </html>

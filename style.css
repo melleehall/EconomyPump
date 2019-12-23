@@ -2,13 +2,15 @@
     box-sizing: border-box;
 }
 
-html, body, .main {
+html {
     height: 100%;
+    width: 100%;
     margin: 0px;
 }
 
 .nav-bar {
     height: 40px;
+    width: 100%;
     background-color: black;
 }
 
@@ -17,7 +19,7 @@ html, body, .main {
     padding: 25px;
 }
 
-.flex-col-center {
+html, .flex-col-center {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,20 +42,12 @@ button, .places {
 
 main {
     background-color: gray;
-    padding: 25px;
+    /* width: 100%; */
+    padding: 20px;
 }
 
 .map {
     margin-top: 50px;
-}
-
-.shop-placeholder {
-    height: 300px;
-    width: 300px;
-    background-color: white;
-    margin-bottom: 50px;
-    justify-content: center;
-    text-align: center;
 }
 
 .hide {
@@ -101,4 +95,12 @@ main {
 
   .green {
       color: green;
+  }
+
+
+  /* Store view */
+
+  .product {
+    border: 2px solid white;
+    padding: 50px;
   }
