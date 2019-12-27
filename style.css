@@ -50,6 +50,10 @@ main {
     margin-top: 50px;
 }
 
+.new-search {
+    margin: 20px;
+}
+
 .hide {
     display: none;
 }

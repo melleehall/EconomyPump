@@ -236,7 +236,7 @@ function newSearchButton () {
   console.log('newSearchButton function ran')
   $('.js-new-search').click(function () {
     $('.search-view').removeClass('hide');
-    $('.stats-view').addClass('hide');
+    $('.stats-view, .shop-view').addClass('hide');
   });
 }
 
