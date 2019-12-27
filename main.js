@@ -14,7 +14,7 @@ const storeFIPS = {
    "Delaware"               :  "10",
    "District of Columbia"   :  "11",
    "Florida"                :  "12",
-   "Geogia"                 :  "13",
+   "Georgia"                :  "13",
    "Guam"                   :  "66",
    "Hawaii"                 :  "15",
    "Idaho"                  :  "16",
@@ -95,10 +95,10 @@ function modifyShopsView (results) {
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];
-    const productDetails = `<div class="product"> 
+    const productDetails = `<div class="product flex-col-center"> 
       <h3 class="js-product"> ${productName} </h3> 
       <p class="js-description"> ${description}... </p> 
-      <a class="js-etsy-link" href=${url} target="_blank"> ${url} <a>
+      <a class="js-etsy-link" href=${url} target="_blank"> Shop This Product on Etsy <a>
       </div>`;
       $('.products-container').append(productDetails);
   };
@@ -232,6 +232,14 @@ function searchButton () {
     });
 }
 
+function newSearchButton () {
+  console.log('newSearchButton function ran')
+  $('.js-new-search').click(function () {
+    $('.search-view').removeClass('hide');
+    $('.stats-view').addClass('hide');
+  });
+}
+
 function shopButton () {
     $('.shop').click(function () {
         $('.stats-view').addClass('hide');
@@ -242,6 +250,7 @@ function shopButton () {
 function watchButtons () {
     goButton();
     searchButton();
+    newSearchButton();
     shopButton();
 }
 
