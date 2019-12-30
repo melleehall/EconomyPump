@@ -58,7 +58,7 @@ const storeFIPS = {
    "Wyoming"                :  "56"
 };
 
-// store api key and endpoint
+// store api key and endpoint",
 
 const searchURLCensus = 'https://api.census.gov/data/timeseries/poverty/saipe';
 
@@ -91,7 +91,10 @@ function modifyStatsView (responseJson) {
 }
 
 function modifyShopsView (results) {
+    
+    $('.products-container').empty();
   for (let i = 0; i < results.length; i++) {
+    console.log(results[i]);
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];

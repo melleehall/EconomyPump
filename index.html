@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,38 @@
     <title> Economy Pump </title>
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
     <script type="text/javascript">
-    (function($){
-        
-        $(document).ready(function(){
-            $('.search').click(function () {
-                const place = $('.places').val();
-                const urlEtsy = getURLEtsy(place);
+        (function ($) {
 
-                console.log(`Etsy API URL in HTML ${urlEtsy}`);
+            $(document).ready(function () {
+                $('.search').click(function () {
+                    const place = $('.places').val();
+                    const urlEtsy = getURLEtsy(place);
 
-                $.ajax({
-                url: urlEtsy,
-                dataType: 'jsonp',
-                success: function(data) {
-                    if (data.ok) {
-                        modifyShopsView(data.results);
-                    } else {
-                        alert('not working');
-                    }
-                    }
-                });
-            })
+                    console.log(`Etsy API URL in HTML ${urlEtsy}`);
+
+                    $.ajax({
+                        url: urlEtsy,
+                        dataType: 'jsonp',
+                        success: function (data) {
+                            if (data.ok) {
+                                modifyShopsView(data.results);
+                            } else {
+                                alert('not working');
+                            }
+                        }
+                    });
+                })
             })
         })
-        (jQuery);
+            (jQuery);
     </script>
 
 </head>
+
 <body>
     <header>
         <nav class="nav-bar">
@@ -45,77 +48,83 @@
     <main class="flex-col-center">
         <div class="hero-img flex-col-center">
             <h1> ECONOMY PUMP </h1>
-            <p> Think of how you feel after practicing sustainable tourism or buying your produce at the local farmer's market versus checking out on Amazon or bagging your cart of groceries at Walmart. </p>
+            <p> Think of how you feel after practicing sustainable tourism or buying your produce at the local farmer's
+                market versus checking out on Amazon or bagging your cart of groceries at Walmart. </p>
             <p> There is power in your dollar. </p>
-            <p> Make informed buying decisions with Economy Pump by seeing how an area's Median Household Income stacks up to that of the US as a whole and then shop small businesses on Etsy.com from storefronts in your chosen area. </p>
+            <p> Make informed buying decisions with Economy Pump by seeing how an area's Median Household Income stacks
+                up to that of the US as a whole and then shop small businesses on Etsy.com from storefronts in your
+                chosen area. </p>
             <button type="button" class="go"> shop to make someone's day </button>
         </div>
 
         <div class="search-view flex-col-center hide">
-                <p> Please, select location from the dropdown menu to see how their Median Household Income compares to the rest of the United States. </p>
-                <div class="dropdown flex-row-center">
-                    <select class="places"> 
-                        <option value="Select a location..."> Select a location... </option>
-                        <option value="Alabama"> Alabama </option>
-                        <option value="Alaska"> Alaska </option>
-                        <option value="Arizona"> Arizona </option>
-                        <option value="Arizona"> Arkansas </option>
-                        <option value="California"> California </option>
-                        <option value="Colorado"> Colorado </option>
-                        <option value="Connecticut"> Connecticut </option>
-                        <option value="Delaware"> Delaware </option>
-                        <option value="District of Columbia"> District of Columbia </option>
-                        <option value="Florida"> Florida </option>
-                        <option value="Georgia"> Georgia </option>
-                        <option value="Guam"> Guam </option>
-                        <option value="Hawaii"> Hawaii </option>
-                        <option value="Idaho"> Idaho </option>
-                        <option value="Illinois"> Illinois </option>
-                        <option value="Indiana"> Indiana </option>
-                        <option value="Iowa"> Iowa </option>
-                        <option value="Kansas"> Kansas </option>
-                        <option value="Kentucky"> Kentucky </option>
-                        <option value="Louisiana"> Louisiana </option>
-                        <option value="Maine"> Maine </option>
-                        <option value="Maryland"> Maryland </option>
-                        <option value="Massachusetts"> Massachusetts</option>
-                        <option value="Michigan"> Michigan </option>
-                        <option value="Minnesota"> Minnesota </option>
-                        <option value="Mississippi"> Mississippi </option>
-                        <option value="Missouri"> Missouri </option>
-                        <option value="Montana"> Montana </option>
-                        <option value="Nebraska"> Nebraska </option>
-                        <option value="Nevada"> Nevada </option>
-                        <option value="New Hampshire"> New Hampshire </option>
-                        <option value="New Jersey"> New Jersey </option>
-                        <option value="New Mexico"> New Mexico </option>
-                        <option value="New York"> New York </option>
-                        <option value="North Carolina"> North Carolina </option>
-                        <option value="North Dakota"> North Dakota </option>
-                        <option value="Ohio"> Ohio </option>
-                        <option value="Oklahoma"> Oklahoma </option>
-                        <option value="Oregon"> Oregon </option>
-                        <option value="Pennsylvania"> Pennsylvania </option>
-                        <option value="Rhode Island"> Rhode Island </option>
-                        <option value="South Carolina"> South Carolina </option>
-                        <option value="South Dakota"> South Dakota </option>
-                        <option value="Tennessee"> Tennessee </option>
-                        <option value="Texas"> Texas </option>
-                        <option value="Utah"> Utah </option>
-                        <option value="Vermont"> Vermont </option>
-                        <option value="Virginia"> Virginia </option>
-                        <option value="Washington"> Washington </option>
-                        <option value="West Virginia"> West Virginia </option>
-                        <option value="Wisconsin"> Wisconsin </option>
-                        <option value="Wyoming"> Wyoming </option>
-                    </select> 
+            <p> Please, select location from the dropdown menu to see how their Median Household Income compares to the
+                rest of the United States. </p>
+            <div class="dropdown flex-row-center">
+                <select class="places">
+                    <option value="Select a location..."> Select a location... </option>
+                    <option value="Alabama"> Alabama </option>
+                    <option value="Alaska"> Alaska </option>
+                    <option value="Arizona"> Arizona </option>
+                    <option value="Arizona"> Arkansas </option>
+                    <option value="California"> California </option>
+                    <option value="Colorado"> Colorado </option>
+                    <option value="Connecticut"> Connecticut </option>
+                    <option value="Delaware"> Delaware </option>
+                    <option value="District of Columbia"> District of Columbia </option>
+                    <option value="Florida"> Florida </option>
+                    <option value="Georgia"> Georgia </option>
+                    <option value="Guam"> Guam </option>
+                    <option value="Hawaii"> Hawaii </option>
+                    <option value="Idaho"> Idaho </option>
+                    <option value="Illinois"> Illinois </option>
+                    <option value="Indiana"> Indiana </option>
+                    <option value="Iowa"> Iowa </option>
+                    <option value="Kansas"> Kansas </option>
+                    <option value="Kentucky"> Kentucky </option>
+                    <option value="Louisiana"> Louisiana </option>
+                    <option value="Maine"> Maine </option>
+                    <option value="Maryland"> Maryland </option>
+                    <option value="Massachusetts"> Massachusetts</option>
+                    <option value="Michigan"> Michigan </option>
+                    <option value="Minnesota"> Minnesota </option>
+                    <option value="Mississippi"> Mississippi </option>
+                    <option value="Missouri"> Missouri </option>
+                    <option value="Montana"> Montana </option>
+                    <option value="Nebraska"> Nebraska </option>
+                    <option value="Nevada"> Nevada </option>
+                    <option value="New Hampshire"> New Hampshire </option>
+                    <option value="New Jersey"> New Jersey </option>
+                    <option value="New Mexico"> New Mexico </option>
+                    <option value="New York"> New York </option>
+                    <option value="North Carolina"> North Carolina </option>
+                    <option value="North Dakota"> North Dakota </option>
+                    <option value="Ohio"> Ohio </option>
+                    <option value="Oklahoma"> Oklahoma </option>
+                    <option value="Oregon"> Oregon </option>
+                    <option value="Pennsylvania"> Pennsylvania </option>
+                    <option value="Rhode Island"> Rhode Island </option>
+                    <option value="South Carolina"> South Carolina </option>
+                    <option value="South Dakota"> South Dakota </option>
+                    <option value="Tennessee"> Tennessee </option>
+                    <option value="Texas"> Texas </option>
+                    <option value="Utah"> Utah </option>
+                    <option value="Vermont"> Vermont </option>
+                    <option value="Virginia"> Virginia </option>
+                    <option value="Washington"> Washington </option>
+                    <option value="West Virginia"> West Virginia </option>
+                    <option value="Wisconsin"> Wisconsin </option>
+                    <option value="Wyoming"> Wyoming </option>
+                </select>
                 <button type="button" class="search"> check stats </button>
             </div>
         </div>
 
         <div class="stats-view flex-col-center hide">
             <img src="USmap.jpeg" alt="map with flag on search location" class="map">
-            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow"> </span> than the median household income in the US. </p>
+            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span
+                    class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow">
+                </span> than the median household income in the US. </p>
             <button type="button" class="shop"> surf Etsy products </button>
             <button type="button" class="js-new-search new-search"> select a new location </button>
         </div>
@@ -126,10 +135,11 @@
             <div class="products-container flex-col-center">
             </div>
         </div>
-
+    </div>
     </main>
-    <!-- <footer>
+    <!-- <footer><option value=""> 
         <p>This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.</p>
     </footer> -->
 </body>
+
 </html>
