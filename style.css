@@ -4,19 +4,12 @@
 
 html {
     height: 100%;
-    width: 100%;
     margin: 0px;
 }
 
-.nav-bar {
-    height: 40px;
-    width: 100%;
-    background-color: black;
-}
-
-.hero-img {
-    background-color: lightgray;
-    padding: 25px;
+.logo {
+    width: 75%;
+    margin-top: 60px;;
 }
 
 html, .flex-col-center {
@@ -31,19 +24,52 @@ html, .flex-col-center {
     align-items: center;
 }
 
-button, .places {
-    background-color: white;
+.head {
+    font-family: 'Roboto', sans-serif;
 }
 
+.para {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+
+.intro, .search-view, .stats-view, .products-container {
+    border: 1px solid black;
+    width: 75%; 
+    padding: 20px;
+    margin: 30px 0px 40px 0px;
+}
+
+.power {
+    font-style: italic;
+}
+
+button, .places {
+    color:white;
+    background-color:  #03a678;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-top: 15px;
+    box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-image: linear-gradient(90deg, #00AA55 0%, #7FFF00 49%, #1D781D 80%, #ADFF2F 100%);
+    animation:slidebg 5s linear infinite;
+    cursor: pointer;
+}
+
+
 .search-view {
-    background-color: lightgray;
+    /* background-color: lightgray; */
     padding: 45px;
 }
 
 main {
-    background-color: gray;
-    /* width: 100%; */
-    padding: 20px;
+    padding: 0px;
 }
 
 .map {
@@ -107,7 +133,12 @@ main {
   .product {
     border: 2px solid white;
     padding: 10px;
-    width: 80%;
   }
 
-  
+  .seperate {
+      width: 100%;
+      height: 3px;
+      margin-top: 40px;
+      background-color: black;
+  }
+

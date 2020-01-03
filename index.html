@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Economy Pump </title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
@@ -35,30 +36,28 @@
                 })
             })
         })
-            (jQuery);
+            (jQuery);    
     </script>
 
 </head>
 
 <body>
-    <header>
-        <nav class="nav-bar">
-        </nav>
+    <header class="flex-col-center">
+        <img class="logo" src="EconomyPumpLogo.jpg" alt="Economy Pump Logo">
     </header>
-    <main class="flex-col-center">
-        <div class="hero-img flex-col-center">
-            <h1> ECONOMY PUMP </h1>
-            <p> Think of how you feel after practicing sustainable tourism or buying your produce at the local farmer's
+    <main class="flex-col-center">    
+        <div class="intro flex-col-center">
+            <p class="para"> Think of how you feel after practicing sustainable tourism or buying your produce at the local farmer's
                 market versus checking out on Amazon or bagging your cart of groceries at Walmart. </p>
-            <p> There is power in your dollar. </p>
-            <p> Make informed buying decisions with Economy Pump by seeing how an area's Median Household Income stacks
+            <p class="para power"> There is power in your dollar. </p>
+            <p class="para"> Make informed buying decisions with Economy Pump by seeing how an area's Median Household Income stacks
                 up to that of the US as a whole and then shop small businesses on Etsy.com from storefronts in your
                 chosen area. </p>
-            <button type="button" class="go"> shop to make someone's day </button>
+            <button type="button" class="go"> pump the economy </button>
         </div>
 
         <div class="search-view flex-col-center hide">
-            <p> Please, select location from the dropdown menu to see how their Median Household Income compares to the
+            <p class="para"> Please, select location from the dropdown menu to see how their Median Household Income compares to the
                 rest of the United States. </p>
             <div class="dropdown flex-row-center">
                 <select class="places">
@@ -116,13 +115,13 @@
                     <option value="Wisconsin"> Wisconsin </option>
                     <option value="Wyoming"> Wyoming </option>
                 </select>
-                <button type="button" class="search"> check stats </button>
+                <button type="button" class="search"> search </button>
             </div>
         </div>
 
         <div class="stats-view flex-col-center hide">
             <img src="USmap.jpeg" alt="map with flag on search location" class="map">
-            <p class="hh-income"> The median Household income in <span class="js-selected-state"> </span> is $<span
+            <p class="hh-income para"> The median Household income in <span class="js-selected-state"> </span> is $<span
                     class="js-state-median"> </span> which is <span class="percent"> </span>% <span class="highlow">
                 </span> than the median household income in the US. </p>
             <button type="button" class="shop"> surf Etsy products </button>
@@ -130,12 +129,12 @@
         </div>
 
         <div class="shop-view flex-col-center hide">
-            <h2> THE SHOP </h2>
+            <h2 class="head"> THE SHOP </h2>
             <button type="button" class="js-new-search new-search"> select a new location </button>
             <div class="products-container flex-col-center">
             </div>
         </div>
-    </div>
+
     </main>
     <!-- <footer><option value=""> 
         <p>This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.</p>

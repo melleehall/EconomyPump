@@ -98,11 +98,11 @@ function modifyShopsView (results) {
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];
-    const productDetails = `<div class="product flex-col-center"> 
+    const productDetails = `<div class="product head flex-col-center"> 
       <h3 class="js-product"> ${productName} </h3> 
       <p class="js-description"> ${description}... </p> 
       <a class="js-etsy-link" href=${url} target="_blank"> Shop This Product on Etsy <a>
-      </div>`;
+      </div><div class="seperate"> </div>`;
       $('.products-container').append(productDetails);
   };
   console.log('populated stores');
@@ -116,36 +116,6 @@ function compareIncomes (responseJson) {
     const percent = Math.round(((stateInc - usMedianIncome) / stateInc) * 100);
     return percent;
 }
-
-
-// need to figure out how to get a return value for HH income out of this promise (revisit this)
-
-// function generateUSHHIncome() {
-//     let states = Object.keys(storeFIPS);
-//     let incomes = [];
-//     for (let i=0; i < states.length; i++) {
-//         let code = storeFIPS[states[i]];
-//         const url = getURL(code);
-//         fetch(url)
-//       .then(response => {
-//         if (response.ok) {
-//           return response.json();
-//         }
-//           throw new Error(response.statusText);
-//         })
-//         .then(function(responseJson) {
-//           const income = responseJson[1][1];
-//           incomes.push(income);
-//           console.log(incomes);
-//         }) 
-//         .catch(err => {
-//           $('#js-error-message').text(`Something went wrong: ${err.message}`);
-//       })
-//     };
-//     console.log(`${incomes} outside of the promise`)
-// }
-
-// $(generateUSHHIncome)
     
 // API Calling Functions
 
@@ -214,7 +184,7 @@ function getURLEtsy(query) {
 
 function goButton () {
     $('.go').click(function () {
-        $('.hero-img').addClass('hide');
+        $('.intro').addClass('hide');
         $('.search-view').removeClass('hide');
     });
 }
@@ -249,6 +219,8 @@ function shopButton () {
         $('.shop-view').removeClass('hide');
     });
 }
+
+
 
 function watchButtons () {
     goButton();
