@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         (function ($) {
 
             $(document).ready(function () {
@@ -22,22 +22,22 @@
 
                     console.log(`Etsy API URL in HTML ${urlEtsy}`);
 
-                    $.ajax({
-                        url: urlEtsy,
-                        dataType: 'jsonp',
-                        success: function (data) {
-                            if (data.ok) {
-                                modifyShopsView(data.results);
-                            } else {
-                                alert('not working');
-                            }
-                        }
-                    });
+                    // $.ajax({
+                    //     url: urlEtsy,
+                    //     dataType: 'jsonp',
+                    //     success: function (data) {
+                    //         if (data.ok) {
+                    //             modifyShopsView(data.results);
+                    //         } else {
+                    //             alert('not working');
+                    //         }
+                    //     }
+                    // });
                 })
             })
         })
             (jQuery);    
-    </script>
+    </script> -->
 
 </head>
 
@@ -115,7 +115,7 @@
                     <option value="Wisconsin"> Wisconsin </option>
                     <option value="Wyoming"> Wyoming </option>
                 </select>
-                <button type="button" class="search"> search </button>
+                <button type="button" id="js-search" class="search show-stats"> search </button>
             </div>
         </div>
 
@@ -131,6 +131,26 @@
         <div class="shop-view flex-col-center hide">
             <h2 class="head"> THE SHOP </h2>
             <button type="button" class="js-new-search new-search"> select a new location </button>
+            <div class="dropdown flex-row-center">
+                    <select class="categories">
+                        <option value="Select a product category..."> Select a product category... </option>
+                        <option value="Accessories"> Accessories </option>
+                        <option value="Art & Collectibles"> Art & Collectibles </option>
+                        <option value="Bags & Purses"> Bags & Purses</option>
+                        <option value="Bath & Beauty"> Bath & Beauty </option>
+                        <option value="Books, Movies & Music"> Books,Movies & Music </option>
+                        <option value="Paper & Party Supplies"> Paper & Party Supplies </option>
+                        <option value="Pet Supplies"> Pet Supplies </option>
+                        <option value="Shoes"> Shoes </option>
+                        <option value="Toys & Games"> Toys & Games </option>
+                        <option value="Weddingds"> Weddings </option>
+                        <option value="Clothing"> Clothing </option>
+                        <option value="Craft Supplies & Tools"> Craft Supplies & Tools </option>
+                        <option value="Electronics & Accessories"> Electronics & Accessories </option>
+                        <option value="Home & Living"> Home & Living </option>
+                        <option value="Jewelry"> Jewelry </option>
+                    </select>
+                    <button type="button" id="js-filter" class="search"> search </button>
             <div class="products-container flex-col-center">
             </div>
         </div>

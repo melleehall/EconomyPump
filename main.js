@@ -94,7 +94,7 @@ function modifyShopsView (results) {
     
     $('.products-container').empty();
   for (let i = 0; i < results.length; i++) {
-    console.log(results[i]);
+    console.log()
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];
@@ -105,7 +105,6 @@ function modifyShopsView (results) {
       </div><div class="seperate"> </div>`;
       $('.products-container').append(productDetails);
   };
-  console.log('populated stores');
 }
 
 
@@ -168,12 +167,14 @@ function getURLCensus(query) {
     return url;
   }
 
-function getURLEtsy(query) {
+function getURLEtsy(query, category="") {
   const params = {
     location: query,
     api_key: etsyKey1 + etsyKey2
   };
 
+  if (category != "") params.category = category;
+ 
   const queryString = formatQueryParams(params);
   const url = searchURLEtsy + '?' + queryString;
     
@@ -190,23 +191,55 @@ function goButton () {
 }
 
 function searchButton () {
-    $('.search').click(function () {
+    $('#js-search').click(function () {
         const place = $('.places').val();
+        getSearch(place);
+    });
+}
 
+function getSearch (place, category="") {
+        
         // Access the FIPS code for the selected state and pass it as the argument to the US Census API
         const urlCensus = getURLCensus(storeFIPS[place]);
         getHHIncomeDisplay(urlCensus);
       
         // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
-        const urlEtsy = getURLEtsy(place)
+        let urlEtsy;
+        if (category == "") {
+          urlEtsy = getURLEtsy(place);
+          $('.search-view').addClass('hide');
+          $('.stats-view').removeClass('hide');
+        } else {
+          $('.products-container').empty();
+          urlEtsy = getURLEtsy(place, category);
+        }
+        console.log(urlEtsy);
+        ajaxSearch(urlEtsy);
+}
 
-        $('.search-view').addClass('hide');
-        $('.stats-view').removeClass('hide');
-    });
+function ajaxSearch (urlEtsy) {
+  $.ajax({
+    url: urlEtsy,
+    dataType: 'jsonp',
+    success: function (data) {
+        if (data.ok) {
+            modifyShopsView(data.results);
+        } else {
+            alert('not working');
+        }
+    }
+});
+}
+
+function filterResults () {
+  $('#js-filter').click(function () {
+    const place = $('.places').val();
+    const category = $('.categories').val();
+    getSearch(place, category);
+  });
 }
 
 function newSearchButton () {
-  console.log('newSearchButton function ran')
   $('.js-new-search').click(function () {
     $('.search-view').removeClass('hide');
     $('.stats-view, .shop-view').addClass('hide');
@@ -224,6 +257,7 @@ function shopButton () {
 
 function watchButtons () {
     goButton();
+    filterResults ();
     searchButton();
     newSearchButton();
     shopButton();
