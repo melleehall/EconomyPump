@@ -94,7 +94,7 @@ function modifyShopsView (results) {
     
     $('.products-container').empty();
   for (let i = 0; i < results.length; i++) {
-    console.log()
+    console.log(results[i]);
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];
@@ -124,7 +124,7 @@ function getHHIncomeDisplay(url) {
       if (response.ok) {
         return response.json();
       }
-      throw new Error(response.statusText);
+      throw new Error (response.statusText);
     })
     .then(responseJson => modifyStatsView(responseJson))
     .catch(err => {
@@ -167,13 +167,13 @@ function getURLCensus(query) {
     return url;
   }
 
-function getURLEtsy(query, category="") {
+function getURLEtsy(query, taxonomy_path="") {
   const params = {
     location: query,
     api_key: etsyKey1 + etsyKey2
   };
 
-  if (category != "") params.category = category;
+  if (taxonomy_path != "") params.taxonomy_path = taxonomy_path;
  
   const queryString = formatQueryParams(params);
   const url = searchURLEtsy + '?' + queryString;
@@ -197,7 +197,7 @@ function searchButton () {
     });
 }
 
-function getSearch (place, category="") {
+function getSearch (place, taxonomy_path="") {
         
         // Access the FIPS code for the selected state and pass it as the argument to the US Census API
         const urlCensus = getURLCensus(storeFIPS[place]);
@@ -205,13 +205,13 @@ function getSearch (place, category="") {
       
         // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
         let urlEtsy;
-        if (category == "") {
+        if (taxonomy_path == "") {
           urlEtsy = getURLEtsy(place);
           $('.search-view').addClass('hide');
           $('.stats-view').removeClass('hide');
         } else {
           $('.products-container').empty();
-          urlEtsy = getURLEtsy(place, category);
+          urlEtsy = getURLEtsy(place, taxonomy_path);
         }
         console.log(urlEtsy);
         ajaxSearch(urlEtsy);
