@@ -86,7 +86,7 @@ function modifyStatsView (responseJson) {
       const posPercent = Math.abs(percent);
       $('.percent').text(posPercent);
       $('.highlow').text('lower');
-      $('.highlow').addClass('red');
+      $('.highlow').removeClass('green').addClass('red');
     };   
 }
 
