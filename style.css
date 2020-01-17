@@ -45,7 +45,7 @@ html, .flex-col-center {
     font-style: italic;
 }
 
-button, .places, .categories {
+button, .places {
     color:white;
     background-color:  #03a678;
     font-family: 'Roboto Condensed', sans-serif;

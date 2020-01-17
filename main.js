@@ -167,13 +167,11 @@ function getURLCensus(query) {
     return url;
   }
 
-function getURLEtsy(query, taxonomy_path="") {
+function getURLEtsy(query) {
   const params = {
     location: query,
     api_key: etsyKey1 + etsyKey2
   };
-
-  if (taxonomy_path != "") params.taxonomy_path = taxonomy_path;
  
   const queryString = formatQueryParams(params);
   const url = searchURLEtsy + '?' + queryString;
@@ -190,31 +188,29 @@ function goButton () {
     });
 }
 
-function searchButton () {
-    $('#js-search').click(function () {
-        const place = $('.places').val();
-        getSearch(place);
-    });
-}
-
-function getSearch (place, taxonomy_path="") {
-        
+function getSearch (place) {   
         // Access the FIPS code for the selected state and pass it as the argument to the US Census API
         const urlCensus = getURLCensus(storeFIPS[place]);
         getHHIncomeDisplay(urlCensus);
       
         // Make a call to Etsy API in the background with the selected state to populate stores - don't show them yet
-        let urlEtsy;
-        if (taxonomy_path == "") {
-          urlEtsy = getURLEtsy(place);
-          $('.search-view').addClass('hide');
-          $('.stats-view').removeClass('hide');
-        } else {
-          $('.products-container').empty();
-          urlEtsy = getURLEtsy(place, taxonomy_path);
-        }
+        $('.products-container').empty();
+        let urlEtsy = getURLEtsy(place);
+        
         console.log(urlEtsy);
         ajaxSearch(urlEtsy);
+}
+
+function searchButton () {
+  $('#js-search').click(function () {
+      console.log('search button clicked');
+
+      $('.stats-view').removeClass('hide');
+      $('.search-view, .shop-view').addClass('hide');
+
+      const place = $('.places').val();
+      getSearch(place);
+  });
 }
 
 function ajaxSearch (urlEtsy) {
@@ -231,13 +227,12 @@ function ajaxSearch (urlEtsy) {
 });
 }
 
-function filterResults () {
-  $('#js-filter').click(function () {
-    const place = $('.places').val();
-    const category = $('.categories').val();
-    getSearch(place, category);
-  });
-}
+// function filterResults () {
+//   $('#js-filter').click(function () {
+//     const place = $('.places').val();
+//     getSearch(place);
+//   });
+// }
 
 function newSearchButton () {
   $('.js-new-search').click(function () {
@@ -257,7 +252,7 @@ function shopButton () {
 
 function watchButtons () {
     goButton();
-    filterResults ();
+    // filterResults ();
     searchButton();
     newSearchButton();
     shopButton();
