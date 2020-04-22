@@ -227,13 +227,6 @@ function ajaxSearch (urlEtsy) {
 });
 }
 
-// function filterResults () {
-//   $('#js-filter').click(function () {
-//     const place = $('.places').val();
-//     getSearch(place);
-//   });
-// }
-
 function newSearchButton () {
   $('.js-new-search').click(function () {
     $('.search-view').removeClass('hide');
@@ -249,10 +242,8 @@ function shopButton () {
 }
 
 
-
 function watchButtons () {
     goButton();
-    // filterResults ();
     searchButton();
     newSearchButton();
     shopButton();
