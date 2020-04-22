@@ -94,15 +94,14 @@ function modifyShopsView (results) {
     
     $('.products-container').empty();
   for (let i = 0; i < results.length; i++) {
-    console.log(results[i]);
     const productName = results[i]['title'];
     const description = (results[i]['description']).substring(0, 250);
     const url = results[i]['url'];
-    const productDetails = `<div class="product head flex-col-center"> 
+    const productDetails = `<li class="product head"> 
       <h3 class="js-product"> ${productName} </h3> 
       <p class="js-description"> ${description}... </p> 
       <a class="js-etsy-link" href=${url} target="_blank"> Shop This Product on Etsy <a>
-      </div><div class="seperate"> </div>`;
+      </li>`;
       $('.products-container').append(productDetails);
   };
 }
@@ -197,13 +196,11 @@ function getSearch (place) {
         $('.products-container').empty();
         let urlEtsy = getURLEtsy(place);
         
-        console.log(urlEtsy);
         ajaxSearch(urlEtsy);
 }
 
 function searchButton () {
   $('#js-search').click(function () {
-      console.log('search button clicked');
 
       $('.stats-view').removeClass('hide');
       $('.search-view, .shop-view').addClass('hide');
