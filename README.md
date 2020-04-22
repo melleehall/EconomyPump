@@ -1,4 +1,4 @@
-**Economy Pump**
+<h1>Economy Pump<h1>
 
 *Live Demo*: https://melleehall.github.io/EconomyPump/
 
