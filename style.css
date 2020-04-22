@@ -36,6 +36,10 @@ html, .flex-col-center {
     font-family: 'Roboto', sans-serif;
 }
 
+.shop-header {
+    font-size: 46px;
+}
+
 .para {
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -142,5 +146,16 @@ main {
       height: 3px;
       margin-top: 40px;
       background-color: black;
+  }
+
+
+
+
+@media (min-width: 768px) {
+    body {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
   }
 
